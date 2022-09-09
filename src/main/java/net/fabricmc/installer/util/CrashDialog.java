@@ -28,7 +28,7 @@ import javax.swing.WindowConstants;
 
 public class CrashDialog {
 	public CrashDialog(Throwable throwable) {
-		JFrame frame = new JFrame("Fabric installer has crashed!");
+		JFrame frame = new JFrame("Ornithe installer has crashed!");
 		Container pane = frame.getContentPane();
 		pane.setLayout(new BorderLayout());
 

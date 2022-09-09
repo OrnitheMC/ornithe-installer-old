@@ -1,6 +1,10 @@
 pluginManagement {
 	repositories {
 		maven {
+			name = 'Ornithe'
+			url = 'https://maven.ornithemc.net/'
+		}
+		maven {
 			name = 'Fabric'
 			url = 'https://maven.fabricmc.net/'
 		}
@@ -9,5 +13,5 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'fabric-installer'
+rootProject.name = 'ornithe-installer'
 

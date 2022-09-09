@@ -62,7 +62,7 @@ import net.fabricmc.installer.util.Utils;
 
 @SuppressWarnings("serial")
 public class ServerPostInstallDialog extends JDialog {
-	private static final String launchCommand = "java -Xmx2G -jar fabric-server-launch.jar nogui";
+	private static final String launchCommand = "java -Xmx2G -jar ornithe-server-launch.jar nogui";
 	private static final int MB = 1000000;
 
 	private final JPanel panel = new JPanel();

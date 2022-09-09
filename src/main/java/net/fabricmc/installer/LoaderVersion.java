@@ -39,8 +39,8 @@ public final class LoaderVersion {
 
 	public LoaderVersion(Path path) throws IOException {
 		try (ZipFile zf = new ZipFile(path.toFile())) {
-			ZipEntry entry = zf.getEntry("fabric.mod.json");
-			if (entry == null) throw new FileNotFoundException("fabric.mod.json");
+			ZipEntry entry = zf.getEntry("ornithe.mod.json");
+			if (entry == null) throw new FileNotFoundException("ornithe.mod.json");
 
 			String modJsonContent;
 

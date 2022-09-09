@@ -181,7 +181,7 @@ public abstract class Handler implements InstallerProgress {
 
 			JFileChooser chooser = new JFileChooser();
 			chooser.setCurrentDirectory(new File("."));
-			chooser.setDialogTitle("Select Fabric Loader JAR");
+			chooser.setDialogTitle("Select Ornithe Loader JAR");
 			chooser.setFileFilter(new FileNameExtensionFilter("Java Archive", "jar"));
 			chooser.setAcceptAllFileFilterUsed(false);
 
@@ -191,7 +191,7 @@ public abstract class Handler implements InstallerProgress {
 
 			File file = chooser.getSelectedFile();
 
-			// determine loader version from fabric.mod.json
+			// determine loader version from ornithe.mod.json
 
 			try {
 				return new LoaderVersion(file.toPath());

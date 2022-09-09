@@ -30,14 +30,14 @@ public final class FabricService {
 	private final String maven;
 
 	/**
-	 * Query Fabric Meta path and decode as JSON.
+	 * Query Ornithe Meta path and decode as JSON.
 	 */
 	public static Json queryMetaJson(String path) throws IOException {
 		return invokeWithFallbacks((service, arg) -> Json.read(Utils.readString(new URL(service.meta + arg))), path);
 	}
 
 	/**
-	 * Query and decode JSON from url, substituting Fabric Maven with fallbacks or overrides.
+	 * Query and decode JSON from url, substituting Ornithe Maven with fallbacks or overrides.
 	 */
 	public static Json queryJsonSubstitutedMaven(String url) throws IOException {
 		if (!url.startsWith(Reference.DEFAULT_MAVEN_SERVER)) {
@@ -50,7 +50,7 @@ public final class FabricService {
 	}
 
 	/**
-	 * Download url to file, substituting Fabric Maven with fallbacks or overrides.
+	 * Download url to file, substituting Ornithe Maven with fallbacks or overrides.
 	 */
 	public static void downloadSubstitutedMaven(String url, Path out) throws IOException {
 		if (!url.startsWith(Reference.DEFAULT_MAVEN_SERVER)) {

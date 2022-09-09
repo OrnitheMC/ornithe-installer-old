@@ -45,7 +45,7 @@ import net.fabricmc.installer.util.Utils;
 
 public final class ServerLauncher {
 	private static final String INSTALL_CONFIG_NAME = "install.properties";
-	private static final Path DATA_DIR = Paths.get(".fabric", "server");
+	private static final Path DATA_DIR = Paths.get(".ornithe", "server");
 
 	public static void main(String[] args) throws Throwable {
 		LaunchData launchData;
@@ -53,13 +53,13 @@ public final class ServerLauncher {
 		try {
 			launchData = initialise();
 		} catch (IOException e) {
-			throw new RuntimeException("Failed to setup fabric server", e);
+			throw new RuntimeException("Failed to setup ornithe server", e);
 		}
 
 		Objects.requireNonNull(launchData, "launchData is null, cannot proceed");
 
 		// Set the game jar path to bypass loader's own lookup
-		System.setProperty("fabric.gameJarPath", launchData.serverJar.toAbsolutePath().toString());
+		System.setProperty("ornithe.gameJarPath", launchData.serverJar.toAbsolutePath().toString());
 
 		@SuppressWarnings("resource")
 		URLClassLoader launchClassLoader = new URLClassLoader(new URL[]{launchData.launchJar.toUri().toURL()});
@@ -73,11 +73,11 @@ public final class ServerLauncher {
 	private static LaunchData initialise() throws IOException {
 		Properties properties = readProperties();
 
-		String customLoaderPath = System.getProperty("fabric.customLoaderPath"); // intended for testing and development
+		String customLoaderPath = System.getProperty("ornithe.customLoaderPath"); // intended for testing and development
 		LoaderVersion loaderVersion;
 
 		if (customLoaderPath == null) {
-			loaderVersion = new LoaderVersion(Objects.requireNonNull(properties.getProperty("fabric-loader-version"), "no loader-version specified in " + INSTALL_CONFIG_NAME));
+			loaderVersion = new LoaderVersion(Objects.requireNonNull(properties.getProperty("ornithe-loader-version"), "no loader-version specified in " + INSTALL_CONFIG_NAME));
 		} else {
 			loaderVersion = new LoaderVersion(Paths.get(customLoaderPath));
 		}
@@ -93,7 +93,7 @@ public final class ServerLauncher {
 		// Vanilla server jar
 		Path serverJar = dataDir.resolve(String.format("%s-server.jar", gameVersion));
 		// Includes the mc version as this jar contains intermediary
-		Path serverLaunchJar = dataDir.resolve(String.format("fabric-loader-server-%s-minecraft-%s.jar", loaderVersion.name, gameVersion));
+		Path serverLaunchJar = dataDir.resolve(String.format("ornithe-loader-server-%s-minecraft-%s.jar", loaderVersion.name, gameVersion));
 
 		if (Files.exists(serverJar) && Files.exists(serverLaunchJar)) { // install exists, verify libs exist and determine main class
 			try {
@@ -183,8 +183,8 @@ public final class ServerLauncher {
 	}
 
 	private static void validateLoaderVersion(LoaderVersion loaderVersion) {
-		if (Utils.compareVersions(loaderVersion.name, "0.12") < 0) { // loader version below 0.12
-			throw new UnsupportedOperationException("Fabric loader 0.12 or higher is required for unattended server installs. Please use a newer fabric loader version, or the full installer.");
+		if (Utils.compareVersions(loaderVersion.name, "0.1") < 0) { // loader version below 0.1
+			throw new UnsupportedOperationException("Ornithe loader 0.1 or higher is required for unattended server installs. Please use a newer ornithe loader version, or the full installer.");
 		}
 	}
 

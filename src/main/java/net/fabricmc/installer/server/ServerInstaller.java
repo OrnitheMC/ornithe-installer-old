@@ -58,7 +58,7 @@ import net.fabricmc.installer.util.Utils;
 public class ServerInstaller {
 	private static final String servicesDir = "META-INF/services/";
 	private static final String manifestPath = "META-INF/MANIFEST.MF";
-	public static final String DEFAULT_LAUNCH_JAR_NAME = "fabric-server-launch.jar";
+	public static final String DEFAULT_LAUNCH_JAR_NAME = "ornithe-server-launch.jar";
 	private static final Pattern SIGNATURE_FILE_PATTERN = Pattern.compile("META-INF/[^/]+\\.(SF|DSA|RSA|EC)");
 
 	public static void install(Path dir, LoaderVersion loaderVersion, String gameVersion, InstallerProgress progress) throws IOException {
@@ -88,11 +88,11 @@ public class ServerInstaller {
 
 			mainClassMeta = json.at("mainClass").asString();
 		} else { // loader jar available, generate library list from it
-			libraries.add(new Library(String.format("net.fabricmc:fabric-loader:%s", loaderVersion.name), null, loaderVersion.path));
-			libraries.add(new Library(String.format("net.fabricmc:intermediary:%s", gameVersion), "https://maven.fabricmc.net/", null));
+			libraries.add(new Library(String.format("net.ornithemc:ornithe-loader:%s", loaderVersion.name), null, loaderVersion.path));
+			libraries.add(new Library(String.format("net.ornithemc:calamus:%s", gameVersion), "https://maven.ornithemc.net/releases", null));
 
 			try (ZipFile zf = new ZipFile(loaderVersion.path.toFile())) {
-				ZipEntry entry = zf.getEntry("fabric-installer.json");
+				ZipEntry entry = zf.getEntry("ornithe-installer.json");
 				Json json = Json.read(Utils.readString(zf.getInputStream(entry)));
 				Json librariesElem = json.at("libraries");
 
@@ -108,7 +108,7 @@ public class ServerInstaller {
 			}
 		}
 
-		String mainClassManifest = "net.fabricmc.loader.launch.server.FabricServerLauncher";
+		String mainClassManifest = "net.ornithemc.loader.launch.server.OrnitheServerLauncher";
 		List<Path> libraryFiles = new ArrayList<>();
 
 		for (Library library : libraries) {
@@ -124,7 +124,7 @@ public class ServerInstaller {
 
 			libraryFiles.add(libraryFile);
 
-			if (library.name.matches("net\\.fabricmc:fabric-loader:.*")) {
+			if (library.name.matches("net\\.ornithemc:ornithe-loader:.*")) {
 				try (JarFile jarFile = new JarFile(libraryFile.toFile())) {
 					Manifest manifest = jarFile.getManifest();
 					mainClassManifest = manifest.getMainAttributes().getValue("Main-Class");
@@ -134,8 +134,7 @@ public class ServerInstaller {
 
 		progress.updateProgress(Utils.BUNDLE.getString("progress.generating.launch.jar"));
 
-		boolean shadeLibraries = Utils.compareVersions(loaderVersion.name, "0.12.5") <= 0; // FabricServerLauncher in Fabric Loader 0.12.5 and earlier requires shading the libs into the launch jar
-		makeLaunchJar(launchJar, mainClassMeta, mainClassManifest, libraryFiles, shadeLibraries, progress);
+		makeLaunchJar(launchJar, mainClassMeta, mainClassManifest, libraryFiles, false, progress);
 	}
 
 	private static void makeLaunchJar(Path file, String launchMainClass, String jarMainClass, List<Path> libraryFiles,
@@ -164,8 +163,8 @@ public class ServerInstaller {
 
 			zipOutputStream.closeEntry();
 
-			addedEntries.add("fabric-server-launch.properties");
-			zipOutputStream.putNextEntry(new ZipEntry("fabric-server-launch.properties"));
+			addedEntries.add("ornithe-server-launch.properties");
+			zipOutputStream.putNextEntry(new ZipEntry("ornithe-server-launch.properties"));
 			zipOutputStream.write(("launch.mainClass=" + launchMainClass + "\n").getBytes(StandardCharsets.UTF_8));
 			zipOutputStream.closeEntry();
 
