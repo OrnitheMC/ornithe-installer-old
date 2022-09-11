@@ -166,7 +166,7 @@ public class Utils {
 			e.printStackTrace();
 		}
 
-		return "TNT"; // Fallback to TNT icon if we cant load Fabric icon.
+		return "TNT"; // Fallback to TNT icon if we cant load Ornithe icon.
 	}
 
 	public static String sha1String(Path path) throws IOException {

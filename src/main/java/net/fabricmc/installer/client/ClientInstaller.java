@@ -25,7 +25,7 @@ import java.text.MessageFormat;
 import mjson.Json;
 
 import net.fabricmc.installer.LoaderVersion;
-import net.fabricmc.installer.util.FabricService;
+import net.fabricmc.installer.util.OrnitheService;
 import net.fabricmc.installer.util.InstallerProgress;
 import net.fabricmc.installer.util.Library;
 import net.fabricmc.installer.util.Reference;
@@ -57,7 +57,7 @@ public class ClientInstaller {
 		Files.deleteIfExists(dummyJar);
 		Files.createFile(dummyJar);
 
-		Json json = FabricService.queryMetaJson(String.format("v2/versions/loader/%s/%s/profile/json", gameVersion, loaderVersion.name));
+		Json json = OrnitheService.queryMetaJson(String.format("v2/versions/loader/%s/%s/profile/json", gameVersion, loaderVersion.name));
 		Files.write(profileJson, json.toString().getBytes(StandardCharsets.UTF_8));
 
 		/*
@@ -73,7 +73,7 @@ public class ClientInstaller {
 
 			//System.out.println("Downloading "+url+" to "+libraryFile);
 			progress.updateProgress(new MessageFormat(Utils.BUNDLE.getString("progress.download.library.entry")).format(new Object[]{library.name}));
-			FabricService.downloadSubstitutedMaven(url, libraryFile);
+			OrnitheService.downloadSubstitutedMaven(url, libraryFile);
 		}
 
 		progress.updateProgress(Utils.BUNDLE.getString("progress.done"));

@@ -50,7 +50,7 @@ import java.util.zip.ZipOutputStream;
 import mjson.Json;
 
 import net.fabricmc.installer.LoaderVersion;
-import net.fabricmc.installer.util.FabricService;
+import net.fabricmc.installer.util.OrnitheService;
 import net.fabricmc.installer.util.InstallerProgress;
 import net.fabricmc.installer.util.Library;
 import net.fabricmc.installer.util.Utils;
@@ -80,7 +80,7 @@ public class ServerInstaller {
 		String mainClassMeta;
 
 		if (loaderVersion.path == null) { // loader jar unavailable, grab everything from meta
-			Json json = FabricService.queryMetaJson(String.format("v2/versions/loader/%s/%s/server/json", gameVersion, loaderVersion.name));
+			Json json = OrnitheService.queryMetaJson(String.format("v2/versions/loader/%s/%s/server/json", gameVersion, loaderVersion.name));
 
 			for (Json libraryJson : json.at("libraries").asJsonList()) {
 				libraries.add(new Library(libraryJson));
@@ -116,7 +116,7 @@ public class ServerInstaller {
 
 			if (library.inputPath == null) {
 				progress.updateProgress(new MessageFormat(Utils.BUNDLE.getString("progress.download.library.entry")).format(new Object[]{library.name}));
-				FabricService.downloadSubstitutedMaven(library.getURL(), libraryFile);
+				OrnitheService.downloadSubstitutedMaven(library.getURL(), libraryFile);
 			} else {
 				Files.createDirectories(libraryFile.getParent());
 				Files.copy(library.inputPath, libraryFile, StandardCopyOption.REPLACE_EXISTING);

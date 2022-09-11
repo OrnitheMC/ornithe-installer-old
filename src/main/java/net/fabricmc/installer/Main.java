@@ -25,7 +25,7 @@ import net.fabricmc.installer.client.ClientHandler;
 import net.fabricmc.installer.server.ServerHandler;
 import net.fabricmc.installer.util.ArgumentParser;
 import net.fabricmc.installer.util.CrashDialog;
-import net.fabricmc.installer.util.FabricService;
+import net.fabricmc.installer.util.OrnitheService;
 import net.fabricmc.installer.util.MetaHandler;
 import net.fabricmc.installer.util.OperatingSystem;
 
@@ -54,7 +54,7 @@ public class Main {
 		String mavenUrl = argumentParser.has("mavenurl") ? argumentParser.get("mavenurl") : null;
 
 		if (metaUrl != null || mavenUrl != null) {
-			FabricService.setFixed(metaUrl, mavenUrl);
+			OrnitheService.setFixed(metaUrl, mavenUrl);
 		}
 
 		GAME_VERSION_META = new MetaHandler("v2/versions/game");
