@@ -24,7 +24,7 @@ public class Reference {
 	public static final String EXPERIMENTAL_LAUNCHER_MANIFEST = "https://maven.fabricmc.net/net/minecraft/experimental_versions.json";
 
 	static final String DEFAULT_META_SERVER = "https://meta.ornithemc.net/";
-	static final String DEFAULT_MAVEN_SERVER = "https://maven.ornithemc.net/releases";
+	static final String DEFAULT_MAVEN_SERVER = "https://maven.ornithemc.net/releases/";
 
 	static final OrnitheService[] FABRIC_SERVICES = {
 			new OrnitheService(DEFAULT_META_SERVER, DEFAULT_MAVEN_SERVER)
