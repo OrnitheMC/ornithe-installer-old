@@ -20,8 +20,7 @@ public class Reference {
 	public static final String LOADER_NAME = "ornithe-loader";
 
 	public static final String SERVER_LAUNCHER_URL = "https://fabricmc.net/use/server/";
-	public static final String MINECRAFT_LAUNCHER_MANIFEST = "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json";
-	public static final String EXPERIMENTAL_LAUNCHER_MANIFEST = "https://maven.fabricmc.net/net/minecraft/experimental_versions.json";
+	public static final String MINECRAFT_VERSIONS_MANIFEST = "https://skyrising.github.io/mc-versions/version_manifest.json";
 
 	static final String DEFAULT_META_SERVER = "https://meta.ornithemc.net/";
 	static final String DEFAULT_MAVEN_SERVER = "https://maven.ornithemc.net/releases/";
