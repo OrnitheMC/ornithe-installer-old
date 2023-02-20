@@ -9,7 +9,7 @@ plugins {
 
 sourceCompatibility = 1.8
 version = '0.11.1'
-archivesBaseName = "ornithe-installer"
+archivesBaseName = "ornithe-installer-old"
 
 def ENV = System.getenv()
 version = version + (ENV.GITHUB_ACTIONS ? "" : "+local")
@@ -154,7 +154,7 @@ task checkVersion {
 	doFirst {
 		def xml
 		try {
-			xml = new URL("https://maven.ornithemc.net/releases/net/ornithemc/ornithe-installer/maven-metadata.xml").text
+			xml = new URL("https://maven.ornithemc.net/releases/net/ornithemc/ornithe-installer-old/maven-metadata.xml").text
 		} catch (FileNotFoundException ignore) {
 			return
 		}

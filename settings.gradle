@@ -13,5 +13,5 @@ pluginManagement {
 	}
 }
 
-rootProject.name = 'ornithe-installer'
+rootProject.name = 'ornithe-installer-old'
 
